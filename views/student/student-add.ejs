@@ -1,0 +1,101 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+<%- include('../includes/navbar.ejs') %>
+<div class="container">
+<div class="row">
+<%- include('../includes/menu.ejs') %>
+<!-- content -->
+<div class="col-md-9">
+<form action="<% if(edit) { %> /student-edit <% } else { %> /student-add <% } %>" method="POST">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <% if(edit) { %>
+            Edit Student Assessment
+        <% } else {  %>
+            Add Student Assessment    
+        <% }   %>
+
+    </div>
+    <div class="panel-body">
+        <div class="form-horizontal">
+            
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="name" class="control-label col-md-3">Name Student</label>
+                        <div class="col-md-8">
+                            <input type="text" name="name" value="<%= edit === true ? student.name : '' %>" id="name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="company" class="control-label col-md-3">Class</label>
+                        <div class="col-md-8">
+                            <input type="text" value="<%= edit === true ? student.classs : '' %>" name="classs" id="company" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="control-label col-md-3">Nik Student</label>
+                        <div class="col-md-8">
+                            <input type="text" value="<%= edit === true ? student.nik : '' %>" name="nik" id="email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="control-label col-md-3">Image</label>
+                        <div class="col-md-8">
+                            <input type="text" value="<%= edit === true ? student.image : '' %>" name="image" id="file" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="control-label col-md-3">Gender</label>
+                        <div class="col-md-8">
+                            <% if(student.gender === "Male") { %>
+                                <select name="gender" class="form-control">
+                                    <option value="Male" selected>Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            <% } else if(student.gender === "Female") { %>
+                                <select name="gender" class="form-control">
+                                    <option value="Male">Male</option>
+                                    <option value="Female" selected>Female</option>
+                                </select>    
+                            <% } else { %>
+                                <select name="gender" class="form-control">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            <% } %>
+                            
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="control-label col-md-3">Address</label>
+                        <div class="col-md-8">
+                            <textarea  name="address" id="address" rows="3"
+                                class="form-control"><%= edit === true ? student.address : '' %></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-6">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="/student-list" class="btn btn-default">Cancel</a>
+                    </div>
+                </div>
+                <% if(edit){ %>
+                    <input type="hidden" value="<%= student.id %>" name="id"  class="form-control">
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+</div>
+<!-- content -->
+<%- include('../includes/footer.ejs') %>
